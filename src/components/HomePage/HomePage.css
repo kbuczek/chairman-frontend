@@ -1,3 +1,11 @@
 section {
   margin-bottom: 2rem;
 }
+
+h1 {
+  margin-top: 5rem;
+}
+
+.hp-form {
+  display: flex;
+}

@@ -49,14 +49,15 @@ const Schedule = ({ option, products }) => {
         {products.map((item, index) => {
           return (
             <div key={index} className="schedule-item">
-              <div></div>
-              <h2>{item.title}</h2>
-              <div>{item.room}</div>
-              <div>{item.person}</div>
-              <div>
-                Rozpoczęcie: {displayFrontZeros(parseInt(item.startingHour))}:
-                {displayFrontZeros(parseInt(item.startingMinute))}
+              <div className="schedule-item-hour">
+                {parseInt(item.startingHour)}:
+                {displayFrontZeros(parseInt(item.startingMinute))} -{" "}
+                {parseInt(item.endingHour)}:
+                {displayFrontZeros(parseInt(item.endingMinute))}
               </div>
+              <h2>{item.title}</h2>
+              <div>{item.person}</div>
+              <div>Sala: {item.room}</div>
             </div>
           );
         })}

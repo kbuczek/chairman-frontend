@@ -17,19 +17,16 @@ const HomePage = () => {
   const addConferences = () => {
     products.map((item) => {
       if (!conferences.includes(item.conference)) {
-        console.log(item.conference);
-        console.log(conferences);
         setConferences([...conferences, item.conference]);
       }
     });
   };
 
-  useEffect(() => {
-    addConferences();
-  }, [products]);
+  // useEffect(() => {
+  //   addConferences();
+  // }, [products]);
 
   const handleSubmit = (e) => {
-    console.log(option);
     setShow(false);
   };
 
@@ -39,9 +36,10 @@ const HomePage = () => {
         <Loading />
       ) : (
         <>
+          {addConferences()}
           {show ? (
             <div className="content">
-              <h1>Wybierz konferencję</h1>
+              <h1 className="hp-title">Wybierz konferencję</h1>
               <Form className="hp-form">
                 <Form.Select
                   value={option}

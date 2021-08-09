@@ -3,12 +3,21 @@
 }
 
 .schedule-form-group {
-  width: 20%;
+  min-width: 25%;
+}
+
+.schedule-form .schedule-form-group:not(:first-child) {
+  margin-left: 1rem;
 }
 
 .schedule-item {
-  background-color: rgb(217, 227, 245);
+  background-color: rgb(234, 240, 250);
+  border-left: 8px solid rgb(111, 149, 211);
   margin-top: 1rem;
   border-radius: 5px;
   padding: 1rem;
+}
+
+.schedule-item-hour {
+  font-size: 1.2rem;
 }

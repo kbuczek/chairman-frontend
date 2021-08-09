@@ -5,16 +5,18 @@ import Error from "./components/Error/Error";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="app">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

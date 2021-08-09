@@ -1,0 +1,14 @@
+.schedule-form {
+  display: flex;
+}
+
+.schedule-form-group {
+  width: 20%;
+}
+
+.schedule-item {
+  background-color: rgb(217, 227, 245);
+  margin-top: 1rem;
+  border-radius: 5px;
+  padding: 1rem;
+}

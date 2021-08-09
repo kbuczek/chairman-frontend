@@ -3,15 +3,19 @@ import "./Loading.css";
 
 const Loading = () => {
   return (
-    <>
-      <div className="lds-ring">
+    <div className="loading">
+      <div className="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
       <div>Ładowanie...</div>
-    </>
+    </div>
   );
 };
 

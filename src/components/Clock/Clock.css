@@ -1,0 +1,28 @@
+.clock {
+  display: flex-inline;
+  justify-content: center !important;
+  text-align: end;
+  /* color: red; */
+  font-weight: 600;
+  font-size: 1.8rem;
+  min-width: 50%;
+  color: rgb(78, 78, 78);
+  padding-top: 0.4rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .clock {
+    font-size: 1.3rem;
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .clock {
+    padding-right: 2rem;
+  }
+}
+
+.clock-time {
+  margin-left: 1rem;
+}

@@ -22,12 +22,11 @@ const HomePage = () => {
     });
   };
 
-  // useEffect(() => {
-  //   addConferences();
-  // }, [products]);
-
   const handleSubmit = (e) => {
-    setShow(false);
+    console.log(option);
+    if (option) {
+      setShow(false);
+    }
   };
 
   return (
@@ -45,6 +44,9 @@ const HomePage = () => {
                   value={option}
                   onChange={(e) => setOption(e.target.value)}
                 >
+                  <option value="" selected disabled>
+                    Rozwiń listę konferencji
+                  </option>
                   {conferences.map((item, index) => (
                     <option key={index} value={item}>
                       {item}

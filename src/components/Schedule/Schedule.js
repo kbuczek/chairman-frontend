@@ -2,27 +2,32 @@ import react, { useState, useEffect } from "react";
 import { Form, FloatingLabel } from "react-bootstrap";
 import Clock from "../Clock/Clock";
 import convertDate from "../../shared/convertDate";
+import displayFrontZeros from "../../shared/displayFrontZeros";
 import "./Schedule.css";
 
 const Schedule = ({ option, products }) => {
   const [days, setDays] = useState([]);
-  const [optionDays, setOptionDays] = useState("");
+  const [optionDays, setOptionDays] = useState("all");
   const [rooms, setRooms] = useState([]);
-  const [optionRooms, setOptionRooms] = useState("");
-  let newProducts = [];
+  const [optionRooms, setOptionRooms] = useState("all");
+  const [newProducts, setNewProducts] = useState([]);
+  let noMatchSum = 0;
+  let thisDayEventsSum = 0;
+  // const [showDayTitle, setShowDayTitle] = useState(true);
 
   useEffect(() => {
-    console.log("useEffect");
-    newProducts = products.filter((item) => item.conference !== option);
-    console.log(newProducts);
-    console.log("!!!", option);
-    console.log("!!!", products);
+    setNewProducts(products.filter((item) => item.conference === option));
   }, []);
+
+  useEffect(() => {
+    updateDays();
+    updateRooms();
+  });
 
   const updateDays = () => {
     console.log("updateDays()", days);
 
-    products.map(({ day }) => {
+    newProducts.map(({ day }) => {
       if (!days.includes(day)) {
         setDays([...days, day]);
       }
@@ -30,10 +35,9 @@ const Schedule = ({ option, products }) => {
 
     let indices = [6, 7, 8, 9, 3, 4, 0, 1];
     days.sort((a, b) => {
-      // let r = 0;
       return indices.find((i) => a.charCodeAt(i) - b.charCodeAt(i));
-      // return r;
     });
+    // days.reverse();
 
     console.log(days);
   };
@@ -41,26 +45,52 @@ const Schedule = ({ option, products }) => {
   const updateRooms = () => {
     console.log("updateRooms()", rooms);
 
-    products.map(({ room }) => {
+    newProducts.map(({ room }) => {
       if (!rooms.includes(room)) {
         setRooms([...rooms, room]);
       }
     });
   };
 
+  const handleChangeDays = (e) => {
+    setOptionDays(e.target.value);
+  };
+
+  const handleChangeRooms = (e) => {
+    setOptionRooms(e.target.value);
+  };
+
+  const resetNoMatchSum = () => {
+    noMatchSum = 0;
+  };
+
+  const resetThisDayEventsSum = () => {
+    thisDayEventsSum = 0;
+  };
+
+  const showNoMatchesMsg = () => {
+    // setShowDayTitle(true);
+    if (
+      noMatchSum === thisDayEventsSum &&
+      noMatchSum !== 0 &&
+      thisDayEventsSum !== 0
+    ) {
+      return <div>Brak wydarzeń tego dnia, spłeniających wybrane kryteria</div>;
+      // setShowDayTitle(false);
+    }
+  };
+
   return (
     <>
-      {updateDays()}
-      {updateRooms()}
       <section className="schedule">
         <Form className="schedule-form">
           <Form.Group className="schedule-form-group">
             <FloatingLabel controlId="floatingSelect" label="Wybierz dzień">
               <Form.Select
-                value={option}
-                onChange={(e) => setOptionDays(e.target.value)}
+                value={optionDays}
+                onChange={(e) => handleChangeDays(e)}
               >
-                <option value="" selected disabled>
+                <option value="all" selected>
                   Wszystkie dni
                 </option>
                 {days.map((item, index) => (
@@ -75,9 +105,12 @@ const Schedule = ({ option, products }) => {
           <Form.Group className="schedule-form-group">
             <FloatingLabel controlId="floatingSelect" label="Wybierz salę">
               <Form.Select
-                value={option}
-                onChange={(e) => setOptionDays(e.target.value)}
+                value={optionRooms}
+                onChange={(e) => handleChangeRooms(e)}
               >
+                <option value="all" selected>
+                  Wszystkie sale
+                </option>
                 {rooms.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
@@ -90,37 +123,45 @@ const Schedule = ({ option, products }) => {
           <Clock />
         </Form>
 
-        {days.map((propDays) => {
-          return (
-            <div className="day">
-              <div className="day-title">{convertDate(propDays)}</div>
-              <div className="day-content">
-                {products.map((item, index) => {
-                  if (item.day === propDays) {
-                    return (
-                      <div key={index} className="schedule-item">
-                        <div className="schedule-item-hour">
-                          {parseInt(item.startingHour)}:
-                          {displayFrontZeros(parseInt(item.startingMinute))} -{" "}
-                          {parseInt(item.endingHour)}:
-                          {displayFrontZeros(parseInt(item.endingMinute))}
+        {days.map((thisDay) => {
+          if (thisDay === optionDays || optionDays === "all") {
+            return (
+              <div className="day">
+                <div className="day-title">{convertDate(thisDay)}</div>
+                <div className="day-content">
+                  {(resetNoMatchSum(), resetThisDayEventsSum())}
+                  {newProducts.map((item, index) => {
+                    thisDayEventsSum++;
+                    if (
+                      item.day === thisDay &&
+                      (item.room === optionRooms || optionRooms === "all")
+                    ) {
+                      return (
+                        <div key={index} className="schedule-item">
+                          <div className="schedule-item-hour">
+                            {parseInt(item.startingHour)}:
+                            {displayFrontZeros(parseInt(item.startingMinute))} -{" "}
+                            {parseInt(item.endingHour)}:
+                            {displayFrontZeros(parseInt(item.endingMinute))}
+                          </div>
+                          <h2>{item.title}</h2>
+                          <div>{item.person}</div>
+                          <div>Sala: {item.room}</div>
                         </div>
-                        <h2>{item.title}</h2>
-                        <div>{item.person}</div>
-                        <div>Sala: {item.room}</div>
-                      </div>
-                    );
-                  }
-                })}
+                      );
+                    } else {
+                      noMatchSum++;
+                    }
+                  })}
+                  {showNoMatchesMsg()}
+                </div>
               </div>
-            </div>
-          );
+            );
+          }
         })}
       </section>
     </>
   );
 };
-
-const displayFrontZeros = (unit) => (unit < 10 ? `0${unit}` : unit);
 
 export default Schedule;

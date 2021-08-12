@@ -21,3 +21,10 @@
 .schedule-item-hour {
   font-size: 1.2rem;
 }
+
+.day-title {
+  font-size: 2rem;
+  color: rgb(230, 73, 1);
+  margin-top: 3rem;
+  text-shadow: 4px 4px 9px rgba(71, 71, 71, 0.1);
+}

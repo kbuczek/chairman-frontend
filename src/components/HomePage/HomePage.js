@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import "./HomePage.css";
 import Schedule from "../Schedule/Schedule";
+import { BsCaretLeftFill } from "react-icons/bs";
 
 const url = "http://localhost:5000/schedule";
 
@@ -67,7 +68,7 @@ const HomePage = () => {
           ) : (
             <>
               <Button variant="link" onClick={() => setShow(true)}>
-                Powrót do wyboru konferencji
+                <BsCaretLeftFill /> Powrót do wyboru konferencji
               </Button>
               <h1 className="title">Harmonogram konferencji {option}</h1>
               <Schedule option={option} products={products} />

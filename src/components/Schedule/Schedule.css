@@ -19,7 +19,11 @@
 }
 
 .schedule-item-hour {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+}
+
+.schedule-item-content {
+  padding-left: 1.2rem;
 }
 
 .day-title {

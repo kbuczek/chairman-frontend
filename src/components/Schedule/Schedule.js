@@ -1,5 +1,5 @@
 import react, { useState, useEffect } from "react";
-import { Form, FloatingLabel } from "react-bootstrap";
+import { Form, FloatingLabel, Card } from "react-bootstrap";
 import Clock from "../Clock/Clock";
 import convertDate from "../../shared/convertDate";
 import displayFrontZeros from "../../shared/displayFrontZeros";
@@ -17,15 +17,27 @@ const Schedule = ({ option, products }) => {
 
   useEffect(() => {
     setNewProducts(products.filter((item) => item.conference === option));
+    // sortNewProducts();
   }, []);
 
   useEffect(() => {
     updateDays();
     updateRooms();
+    sortNewProducts();
   });
 
+  const sortNewProducts = () => {
+    console.log("AAAA");
+    console.log(newProducts);
+    newProducts.sort(
+      (a, b) => parseInt(a.startingHour) - parseInt(b.startingHour)
+    );
+    newProducts.reverse();
+    console.log(newProducts);
+  };
+
   const updateDays = () => {
-    console.log("updateDays()", days);
+    // console.log("updateDays()", days);
 
     newProducts.map(({ day }) => {
       if (!days.includes(day)) {
@@ -39,11 +51,11 @@ const Schedule = ({ option, products }) => {
     });
     // days.reverse();
 
-    console.log(days);
+    // console.log(days);
   };
 
   const updateRooms = () => {
-    console.log("updateRooms()", rooms);
+    // console.log("updateRooms()", rooms);
 
     newProducts.map(({ room }) => {
       if (!rooms.includes(room)) {
@@ -75,7 +87,11 @@ const Schedule = ({ option, products }) => {
       noMatchSum !== 0 &&
       thisDayEventsSum !== 0
     ) {
-      return <div>Brak wydarzeń tego dnia, spłeniających wybrane kryteria</div>;
+      return (
+        <div style={{ color: "rgb(150, 150, 150)" }}>
+          Brak wydarzeń tego dnia, spłeniających wybrane kryteria
+        </div>
+      );
       // setShowDayTitle(false);
     }
   };
@@ -123,10 +139,11 @@ const Schedule = ({ option, products }) => {
           <Clock />
         </Form>
 
-        {days.map((thisDay) => {
+        {/* {sortNewProducts()} */}
+        {days.map((thisDay, index) => {
           if (thisDay === optionDays || optionDays === "all") {
             return (
-              <div className="day">
+              <div key={index} className="day">
                 <div className="day-title">{convertDate(thisDay)}</div>
                 <div className="day-content">
                   {(resetNoMatchSum(), resetThisDayEventsSum())}
@@ -144,9 +161,11 @@ const Schedule = ({ option, products }) => {
                             {parseInt(item.endingHour)}:
                             {displayFrontZeros(parseInt(item.endingMinute))}
                           </div>
-                          <h2>{item.title}</h2>
-                          <div>{item.person}</div>
-                          <div>Sala: {item.room}</div>
+                          <div className="schedule-item-content">
+                            <h2>{item.title}</h2>
+                            <div>{item.person}</div>
+                            <div>Sala: {item.room}</div>
+                          </div>
                         </div>
                       );
                     } else {

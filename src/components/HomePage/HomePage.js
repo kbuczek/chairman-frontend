@@ -24,7 +24,7 @@ const HomePage = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(option);
+    // console.log(option);
     if (option) {
       setShow(false);
     }

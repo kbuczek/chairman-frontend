@@ -17,7 +17,6 @@ const Schedule = ({ option, products }) => {
 
   useEffect(() => {
     setNewProducts(products.filter((item) => item.conference === option));
-    // sortNewProducts();
   }, []);
 
   useEffect(() => {
@@ -27,13 +26,12 @@ const Schedule = ({ option, products }) => {
   });
 
   const sortNewProducts = () => {
-    console.log("AAAA");
-    console.log(newProducts);
+    console.log("przed", newProducts);
     newProducts.sort(
       (a, b) => parseInt(a.startingHour) - parseInt(b.startingHour)
     );
-    newProducts.reverse();
-    console.log(newProducts);
+    // newProducts.reverse();
+    console.log("po", newProducts);
   };
 
   const updateDays = () => {

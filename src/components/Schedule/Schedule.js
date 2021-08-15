@@ -3,6 +3,7 @@ import { Form, FloatingLabel, Card } from "react-bootstrap";
 import Clock from "../Clock/Clock";
 import convertDate from "../../shared/convertDate";
 import displayFrontZeros from "../../shared/displayFrontZeros";
+import CurrentTimer from "../../shared/currentTimer";
 import "./Schedule.css";
 
 const Schedule = ({ option, products }) => {
@@ -158,6 +159,14 @@ const Schedule = ({ option, products }) => {
                             {displayFrontZeros(parseInt(item.startingMinute))} -{" "}
                             {parseInt(item.endingHour)}:
                             {displayFrontZeros(parseInt(item.endingMinute))}
+                            <CurrentTimer
+                              day={item.day}
+                              startingHour={item.startingHour}
+                              startingMinute={item.startingMinute}
+                              endingHour={item.endingHour}
+                              endingMinute={item.endingMinute}
+                              text={false}
+                            />
                           </div>
                           <div className="schedule-item-content">
                             <h2>{item.title}</h2>

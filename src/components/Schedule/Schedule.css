@@ -19,6 +19,9 @@
 }
 
 .schedule-item-hour {
+  display: flex;
+  align-items: center;
+  justify-content: start;
   font-size: 1.5rem;
 }
 
@@ -28,7 +31,7 @@
 
 .day-title {
   font-size: 2rem;
-  color: rgb(230, 73, 1);
+  /* color: rgb(230, 73, 1); */
   margin-top: 3rem;
   text-shadow: 4px 4px 9px rgba(71, 71, 71, 0.1);
 }

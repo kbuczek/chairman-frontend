@@ -38,7 +38,9 @@ export default function CurrentTimer({
         parseInt(endingHour) * 60 + parseInt(endingMinute);
       let currentTimeMinutes = hours * 60 + minutes;
       let toEndMinutesLeft = endingTimeMinutes - currentTimeMinutes;
-      if (toEndMinutesLeft <= 90 && toEndMinutesLeft >= 0) {
+      let interval = endingTimeMinutes - startingTimeMinutes;
+      if (toEndMinutesLeft <= interval && toEndMinutesLeft >= 0) {
+        //interval to 90?
         return (
           <div
             style={{

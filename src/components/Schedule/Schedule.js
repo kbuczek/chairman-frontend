@@ -14,25 +14,38 @@ const Schedule = ({ option, products }) => {
   const [newProducts, setNewProducts] = useState([]);
   let noMatchSum = 0;
   let thisDayEventsSum = 0;
-  // const [showDayTitle, setShowDayTitle] = useState(true);
 
   useEffect(() => {
     setNewProducts(products.filter((item) => item.conference === option));
   }, []);
 
   useEffect(() => {
+    sortNewProducts();
+  }, [newProducts]);
+
+  useEffect(() => {
+    // sortNewProducts();
     updateDays();
     updateRooms();
-    sortNewProducts();
   });
 
+  useEffect(() => {
+    days.sort((a, b) => {
+      let aa = a.split("-").reverse().join(),
+        bb = b.split("-").reverse().join();
+      return aa < bb ? -1 : aa > bb ? 1 : 0;
+    });
+    // setDays([...days]);
+  }, [days]);
+
   const sortNewProducts = () => {
-    console.log("przed", newProducts);
+    // console.log("przed", newProducts);
     newProducts.sort(
       (a, b) => parseInt(a.startingHour) - parseInt(b.startingHour)
     );
+
     // newProducts.reverse();
-    console.log("po", newProducts);
+    // console.log("po", newProducts);
   };
 
   const updateDays = () => {
@@ -44,13 +57,15 @@ const Schedule = ({ option, products }) => {
       }
     });
 
-    let indices = [6, 7, 8, 9, 3, 4, 0, 1];
-    days.sort((a, b) => {
-      return indices.find((i) => a.charCodeAt(i) - b.charCodeAt(i));
-    });
-    // days.reverse();
+    setDays((days) =>
+      days.sort((a, b) => {
+        let aa = a.split("-").reverse().join(),
+          bb = b.split("-").reverse().join();
+        return aa < bb ? -1 : aa > bb ? 1 : 0;
+      })
+    );
 
-    // console.log(days);
+    console.log("days", days);
   };
 
   const updateRooms = () => {
@@ -138,7 +153,7 @@ const Schedule = ({ option, products }) => {
           <Clock />
         </Form>
 
-        {/* {sortNewProducts()} */}
+        {/* {updateDays()} */}
         {days.map((thisDay, index) => {
           if (thisDay === optionDays || optionDays === "all") {
             return (

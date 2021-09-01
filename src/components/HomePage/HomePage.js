@@ -15,6 +15,10 @@ const HomePage = () => {
   const [conferences, setConferences] = useState([]);
   const [option, setOption] = useState("");
 
+  useEffect(() => {
+    addConferences();
+  });
+
   const addConferences = () => {
     products.map((item) => {
       if (!conferences.includes(item.conference)) {
@@ -36,7 +40,6 @@ const HomePage = () => {
         <Loading />
       ) : (
         <>
-          {addConferences()}
           {show ? (
             <div className="content">
               <h1 className="hp-title">Wybierz konferencję</h1>

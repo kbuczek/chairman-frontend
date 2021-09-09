@@ -153,7 +153,6 @@ const Schedule = ({ option, products }) => {
           <Clock />
         </Form>
 
-        {/* {updateDays()} */}
         {days.map((thisDay, index) => {
           if (thisDay === optionDays || optionDays === "all") {
             return (

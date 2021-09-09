@@ -41,7 +41,9 @@ const Schedule = ({ option, products }) => {
   const sortNewProducts = () => {
     // console.log("przed", newProducts);
     newProducts.sort(
-      (a, b) => parseInt(a.startingHour) - parseInt(b.startingHour)
+      (a, b) =>
+        parseInt(a.startingHour) - parseInt(b.startingHour) ||
+        parseInt(a.startingMinute) - parseInt(b.startingMinute)
     );
 
     // newProducts.reverse();

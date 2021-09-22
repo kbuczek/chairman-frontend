@@ -1,13 +1,21 @@
-.schedule-form {
-  display: flex;
+@media screen and (min-width: 900px) {
+  .schedule-form {
+    display: flex;
+  }
+  .schedule-form .schedule-form-group:not(:first-child) {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .schedule-form-group {
+    margin-bottom: 1rem;
+  }
 }
 
 .schedule-form-group {
   min-width: 26%;
-}
-
-.schedule-form .schedule-form-group:not(:first-child) {
-  margin-left: 1rem;
+  /* margin-bottom: 10rem; */
 }
 
 .schedule-item {

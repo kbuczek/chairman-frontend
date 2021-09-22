@@ -7,7 +7,7 @@ import "./HomePage.css";
 import Schedule from "../Schedule/Schedule";
 import { BsCaretLeftFill } from "react-icons/bs";
 
-const url = "http://localhost:5000/schedule";
+const url = "https://chairman-app.herokuapp.com/schedule";
 
 const HomePage = () => {
   const { loading, products } = useFetch(url);

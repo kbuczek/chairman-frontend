@@ -6,10 +6,26 @@ section {
   margin-bottom: 2rem;
 }
 
+.container {
+  padding-bottom: 2rem;
+}
+
 .content {
-  margin-top: 20rem !important;
+  /* margin-top: 20rem !important; */
+  /* position: relative; */
+  padding-top: 30% !important;
   max-width: 50rem;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .content {
+    /* margin-top: 20rem !important; */
+    /* position: relative; */
+    padding-top: 65% !important;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
 }
 
 .hp-title {
@@ -29,4 +45,5 @@ section {
   margin-bottom: 3rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }

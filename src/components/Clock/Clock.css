@@ -1,18 +1,25 @@
 .clock {
-  display: flex-inline;
+  /* display: flex-inline; */
   justify-content: center !important;
-  text-align: end;
+  align-items: center;
+  text-align: center;
   /* color: red; */
   font-weight: 600;
   font-size: 1.8rem;
-  min-width: 50%;
+  /* min-width: 50%; */
   color: rgb(78, 78, 78);
   padding-top: 0.4rem;
 }
 
+@media only screen and (min-width: 992px) {
+  .clock {
+    padding-left: 4rem;
+  }
+}
+
 @media only screen and (max-width: 992px) {
   .clock {
-    font-size: 1.3rem;
+    /* font-size: 1rem; */
     padding-top: 0;
   }
 }

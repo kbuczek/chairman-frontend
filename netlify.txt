@@ -1,4 +1,0 @@
-u: chariman.app@gmail.com
-p: Ch@riman654
-
-link: chairman.netlify.app
